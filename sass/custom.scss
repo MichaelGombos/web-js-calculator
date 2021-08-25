@@ -7,9 +7,9 @@ $secondary: #1e1e1e;
 @import "../node_modules/bootstrap/scss/_variables.scss";
 
 $custom-theme-colors: (
-  "darker": #333333,
-  "evenDarker": #434343,
-  "darkest": #5d5d5d,
+  "darkGrey": #333333,
+  "mediumGrey": #434343,
+  "lightGrey": #5d5d5d,
 );
 
 $theme-colors: map-merge($custom-theme-colors, $theme-colors);
