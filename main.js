@@ -1,5 +1,6 @@
 //Grab calculator button container
 const buttonGrid = document.getElementById("button-grid");
+const evalDisplay = document.getElementById("evaluation-display");
 let buttons = new Array();
 console.log(buttonGrid);
 //Give event listeners to every button
@@ -9,38 +10,61 @@ for (row of buttonGrid.children) {
     //button inner text
     let text = button.innerText;
     button.addEventListener("click", () => {
-      button.text = text;
-      console.log(button.text);
+      evaluateItem(text);
+      //read expression then add to string
     });
     buttons.push(button);
   }
 }
 
-let currentExpression = "";
+let currentExpression = " ";
 
-function addToExpression(item) {}
+function clearExpression() {
+  currentExpression = " ";
+  displayExpression(currentExpression);
+}
 
-function checkItem(item) {
+function evaluateItem(item) {
   switch (item) {
     case "(":
-      return " (";
+      currentExpression += " (";
+      displayExpression();
+      return;
     case ")":
-      return ") ";
+      currentExpression += ") ";
+      displayExpression();
+      return;
     case "AC":
-      //function to clear que
-      break;
+      clearExpression();
+      return;
     case "/":
-      return " / ";
+      currentExpression += " / ";
+      displayExpression();
+      return;
     case "x":
-      return " x ";
+      currentExpression += " * ";
+      displayExpression();
+      return;
     case "-":
-      return " - ";
+      currentExpression += " - ";
+      displayExpression();
+      return;
     case "+":
-      return " + ";
+      currentExpression += " + ";
+      displayExpression();
+      return;
     case "=":
-      //function to evaluate expression
-      break;
+      console.log("equals: " + currentExpression);
+      currentExpression = eval(currentExpression);
+      displayExpression();
+      return;
   }
-  return item;
+  currentExpression += item;
+  displayExpression();
+}
+
+function displayExpression() {
+  console.log(currentExpression);
+  evalDisplay.innerText = currentExpression;
 }
 //Every button added to an object, name value set to inner html of said button element
